@@ -7,7 +7,7 @@ library(RColorBrewer)
 #Text processing
 library(stringr)
 #Text mining
-library(tm)
+library(tm)  
 #Wordcloud creation
 library(wordcloud)
 
