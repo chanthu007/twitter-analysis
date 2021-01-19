@@ -14,21 +14,6 @@ library(wordcloud)
 #install.packages("wordcloud2")
 library(wordcloud2)
 
-consumerKey = "KxnSMi1SiBgNMbPDE5Q2mL0Qo"
-consumerSecret = "Q98N1pe3nELOEuSC1UUc3zjp6lq6ErCXk1u57DIMkUhSXyqE9k"
-
-accessToken = "1148301020516225024-Gfgtvd9qOHLTsLS6yxLWFLsfF3JSw9"
-accessTokenSecret = "24ZjJTLqLPElAeYfxgk1wH1moVWysbec7ue5nbZej34Sh"
-
-setup_twitter_oauth(consumerKey,consumerSecret,accessToken,accessTokenSecret)
-
-#Search for tweets
-twitter.covid.search <- searchTwitter("covid", n=15000, lang="en")
-#Convert tweets to dataframe
-twitter.excel <- twListToDF(twitter.covid.search)
-#Converts tweets to csv
-write.csv(twitter.excel,"twitter_covid02.csv")
-
 #Import tweets
 tweetsdf <- read.csv(file.choose())
 
