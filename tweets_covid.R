@@ -16,7 +16,7 @@ library(tm)
 library(wordcloud2)
 
 install.packages('sentimentr')
-library(sentimentr)
+library(sentimentr) 
 
 
 
