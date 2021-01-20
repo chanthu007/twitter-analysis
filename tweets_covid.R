@@ -1,35 +1,40 @@
-library(twitteR)
-library(tidyverse)
+#LIBRARIES REQUIRED FOR THIS PROJECT.
 
-#install.packages("RColorBrewer")
-library(RColorBrewer)
+# Extracting tweets
+library(twitteR)
+
+#Data Maipulation
+library(tidyverse)
 
 #Text processing
 library(stringr)
+
 #Text mining 
-library(tm)  
-#Wordcloud creation
-library(wordcloud)
+library(tm)
 
 #install.packages("wordcloud2")
 library(wordcloud2)
+
+
+#Extracted tweets from twitter using twitterR package and copied it to a csv file.
+# Only 1500 rows of data was used out of 20,000 extracted to bring down the size of csv file
+
 
 #Import tweets
 tweetsdf <- read.csv(file.choose())
 
 #Backup tweets
 tweetsdf.backup <- tweetsdf
-tweetsdf <- tweetsdf.backup
-
 
 
 #Removing retweets
 tweetsdf <- tweetsdf %>% filter(isRetweet=="FALSE")
 
 
-
 #Converts tweets to ASCII 
 tweetsdf$text <- iconv(tweetsdf$text,from="UTF-8",to="ASCII",sub="")
+
+# We are only intrested in tweets(data) in text file, below process is used to clean text column of unwanted details.
 
 #Remove usernames
 tweetsdf$text <- gsub("@\\w+", "", tweetsdf$text)
@@ -46,7 +51,7 @@ tweetsdf$text <- gsub("[[:punct:]]", "", tweetsdf$text)
 tweetsdf$text <- gsub("http\\w+", "", tweetsdf$text)
 
 
-#Create corpus
+#Create corpus, this is required for creating wordcloud and further cleansing of text field
 covid.words <- Corpus(VectorSource(tweetsdf$text))
 
 # Removing stop words
@@ -73,6 +78,7 @@ head(d, 10)
 
 wordcloud(words=d$word, freq=d$freq, min.freq = 8, colors= c("grey80","darkgoldenrod1","tomato"),random.order=FALSE,rot.per=0.35)
 
+#Since tweets analysed were about covid, covid was the most frequently used word. Removed word covid from the wordcloud.
 wordcloud2(data=d[-1,], size=1, color='random-dark')
 
 
