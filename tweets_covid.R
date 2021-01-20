@@ -15,6 +15,10 @@ library(tm)
 #install.packages("wordcloud2")
 library(wordcloud2)
 
+install.packages('sentimentr')
+library(sentimentr)
+
+
 
 #Extracted tweets from twitter using twitterR package and copied it to a csv file.
 # Only 1500 rows of data was used out of 20,000 extracted to bring down the size of csv file
@@ -81,7 +85,7 @@ wordcloud(words=d$word, freq=d$freq, min.freq = 8, colors= c("grey80","darkgolde
 #Since tweets analysed were about covid, covid was the most frequently used word. Removed word covid from the wordcloud.
 wordcloud2(data=d[-1,], size=1, color='random-dark')
 
-
-
+#SENTIMENT ANALYSIS
+sentiment <- tweetsdf$text %>% extract_sentiment_terms()
 
 
