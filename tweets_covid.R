@@ -78,14 +78,9 @@ d <- data.frame(word = names(v),freq=v)
 head(d, 10)
 
 
-#Wordcloud
-
-wordcloud(words=d$word, freq=d$freq, min.freq = 8, colors= c("grey80","darkgoldenrod1","tomato"),random.order=FALSE,rot.per=0.35)
-
 #Since tweets analysed were about covid, covid was the most frequently used word. Removed word covid from the wordcloud.
 wordcloud2(data=d[-1,], size=1, color='random-dark')
 
-#SENTIMENT ANALYSIS
-sentiment <- tweetsdf$text %>% extract_sentiment_terms()
+
 
 
