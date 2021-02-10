@@ -18,6 +18,22 @@ library(wordcloud2)
 install.packages('sentimentr')
 library(sentimentr) 
 
+#Extracting tweets from twitter
+consumerKey = "xxxxxxx"
+consumerSecret = "xxxxxxxx"
+accessToken = "xxxxxxxxxxxxxxxxx"
+accessTokenSecret = "xxxxxxxxxxxxxxxx"
+setup_twitter_oauth(consumerKey,consumerSecret,accessToken,accessTokenSecret)
+
+#Search for tweets
+twitter.covid.search <- searchTwitter("covid", n=15000, lang="en")
+
+#Convert tweets to dataframe
+twitter.excel <- twListToDF(twitter.covid.search)
+
+#Converts tweets to csv
+write.csv(twitter.excel,"twitter_covid02.csv")
+
 
 
 #Extracted tweets from twitter using twitterR package and copied it to a csv file.
@@ -82,5 +98,6 @@ head(d, 10)
 wordcloud2(data=d[-1,], size=1, color='random-dark')
 
 
+#Working on sentiment analysis
 
 
